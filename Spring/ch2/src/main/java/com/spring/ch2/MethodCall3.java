@@ -15,7 +15,6 @@ import org.springframework.validation.support.BindingAwareModelMap;
 
 public class MethodCall3 {
 	public static void main(String[] args) throws Exception{
-		// 1. 요청할 때 제공된 값 - request.getParameterMap();
 		Map map = new HashMap();
 		map.put("year", "2021");
 		map.put("month", "10");
@@ -28,8 +27,8 @@ public class MethodCall3 {
 		// YoilTellerMVC.main(int year, int month, int day, Model model)
 		Method main = clazz.getDeclaredMethod("main", int.class, int.class, int.class, Model.class);
 				
-		Parameter[] paramArr = main.getParameters(); // main메서드의 매개변수 목록을 가져온다.
-		Object[] argArr = new Object[main.getParameterCount()]; // 매개변수 갯수와 같은 길이의 Object배열을 생성
+		Parameter[] paramArr = main.getParameters();
+		Object[] argArr = new Object[main.getParameterCount()];
 		
 		for(int i=0;i<paramArr.length;i++) {
 			String paramName = paramArr[i].getName();
