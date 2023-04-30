@@ -11,26 +11,38 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 // 년 월 일을 입력하면 요일을 알려주는 프로그램
 @Controller
-public class YoilTellerMVC {	
-	@RequestMapping("/getYoilMVC")
+public class YoilTellerMVC4 {
+	@ExceptionHandler(Exception.class)
+	public String catcher(Exception ex) {
+		ex.printStackTrace();
+		return "yoilError";
+	}
+	
+	@RequestMapping("/getYoilMVC4")
 //	public void main(HttpServletRequest request, HttpServletResponse response) throws IOException {
-	public String main(int year, int month, int day, Model model) throws IOException {
+	public String main(MyDate date, Model model) throws IOException {
 
 		// 1. 유효성 검사
-		if (!isValid(year, month, day))
+		if (!isValid(date))
 			return "yoilError"; // /WEB-INF/views/yoilError.jsp
 
 		// 2. 요일 계
-		char yoil = getYoil(year, month, day);
+		char yoil = getYoil(date);
 		
 		// 3. 계한 결과를 model에 저장
-		model.addAttribute("year", year);
-		model.addAttribute("month", month);
-		model.addAttribute("day", day);
+		model.addAttribute("myDate", date);
 		model.addAttribute("yoil", yoil);
 
 		return "yoil"; // /WEB-INF/views/yoil.jsp
 
+	}
+
+	private boolean isValid(MyDate date) {
+		return isValid(date.getYear(), date.getMonth(), date.getDay());
+	}
+
+	private char getYoil(MyDate date) {
+		return getYoil(date.getYear(), date.getMonth(), date.getDay());
 	}
 
 	private boolean isValid(int year, int month, int day) {
