@@ -24,7 +24,7 @@ public class HomeController {
 	 */
 	
 	// 2. URL과 메서드 연결(매핑, mapping)
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
@@ -36,6 +36,11 @@ public class HomeController {
 		model.addAttribute("serverTime", formattedDate );
 		
 		return "home";
+	}
+	
+	@RequestMapping("/")
+	public String index() {
+		return "index";
 	}
 	
 }
