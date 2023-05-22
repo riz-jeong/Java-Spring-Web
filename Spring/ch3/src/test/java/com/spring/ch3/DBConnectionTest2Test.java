@@ -132,6 +132,44 @@ public class DBConnectionTest2Test {
         ps.executeUpdate(); // insert, delete, update
     }
 
+    @Test
+    public void transactionTest() throws Exception {
+        Connection conn = null;
+        try {
+            deleteAll();
+            conn = ds.getConnection();
+            conn.setAutoCommit(false); // conn.setAutoCommit(true);
+
+//        INSERT INTO user_info (id, pwd, name, email, birth, sns, reg_date)
+//        VALUES ('asdf22', '1234', 'smith', 'aaa@aaa.com', '2022-01-01', 'facebook', now());
+
+            String sql = "INSERT INTO user_info VALUES (?, ?, ?, ?, ?, ?, now())";
+
+            PreparedStatement ps = conn.prepareStatement(sql); // SQL Injection공격, 성능향상
+            ps.setString(1, "asdf");
+            ps.setString(2, "1234");
+            ps.setString(3, "abc");
+            ps.setString(4, "aaa@aaa.com");
+            ps.setDate(5, new java.sql.Date(new Date().getTime()));
+            ps.setString(6, "fb");
+
+            int rowCnt = ps.executeUpdate(); // insert, delete, update
+
+            ps.setString(1, "asdf");
+            rowCnt = ps.executeUpdate();
+
+            conn.commit();
+
+        } catch (Exception e) {
+            conn.rollback();
+            e.printStackTrace();
+//            throw new RuntimeException(e);
+        } finally {
+
+        }
+
+    }
+
     // 사용자 정보를 user_info 테이블에 저장하는 메서드
     public int insertUser(User user) throws Exception{
         Connection conn = ds.getConnection();
