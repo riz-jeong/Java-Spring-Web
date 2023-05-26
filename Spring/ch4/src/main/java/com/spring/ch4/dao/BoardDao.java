@@ -1,6 +1,7 @@
 package com.spring.ch4.dao;
 
 import com.spring.ch4.domain.BoardDto;
+import com.spring.ch4.domain.SearchCondition;
 
 import java.util.List;
 import java.util.Map;
@@ -35,9 +36,9 @@ public interface BoardDao {
     int increaseViewCnt(Integer bno) throws Exception // int update(String statement, Object parameter)
     ;
 
-//    int searchResultCnt(SearchCondition sc) throws Exception // T selectOne(String statement, Object parameter)
-//    ;
-//
-//    List<BoardDto> searchSelectPage(SearchCondition sc) throws Exception // List<E> selectList(String statement, Object parameter)
-//    ;
+    int searchResultCnt(SearchCondition sc) throws Exception // T selectOne(String statement, Object parameter)
+    ;
+
+    List<BoardDto> searchSelectPage(SearchCondition sc) throws Exception // List<E> selectList(String statement, Object parameter)
+    ;
 }

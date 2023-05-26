@@ -5,5 +5,6 @@
 <configuration>
     <typeAliases>
         <typeAlias alias="BoardDto" type="com.spring.ch4.domain.BoardDto"/>
+        <typeAlias alias="SearchCondition" type="com.spring.ch4.domain.SearchCondition"/>
     </typeAliases>
 </configuration>
