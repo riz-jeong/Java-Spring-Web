@@ -41,4 +41,6 @@ public interface BoardDao {
 
     List<BoardDto> searchSelectPage(SearchCondition sc) throws Exception // List<E> selectList(String statement, Object parameter)
     ;
+
+    int updateCommentCnt(Integer bno, int i) throws Exception;
 }
